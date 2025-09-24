@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from faker import Faker
 
-
 fake = Faker()
 
 fake_login = fake.user_name()
@@ -36,4 +35,6 @@ def test_error_message_for_auth(user, page):
     ).text
 
     assert "Пожалуйста, проверьте свой пароль и имя аккаунта и попробуйте снова." == error_message
+
+
 
