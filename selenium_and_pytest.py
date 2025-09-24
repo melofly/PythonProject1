@@ -16,7 +16,6 @@ def page():
     driver.get('https://store.steampowered.com/')
     return driver
 
-
 @pytest.mark.parametrize(
     'user',
     [
