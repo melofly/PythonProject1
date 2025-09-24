@@ -5,7 +5,6 @@ from faker import Faker
 
 
 fake = Faker()
-
 fake_login = fake.user_name()
 fake_password = fake.password()
 
