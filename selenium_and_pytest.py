@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from faker import Faker
 
+
 fake = Faker()
 
 fake_login = fake.user_name()
