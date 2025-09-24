@@ -9,4 +9,5 @@ def driver():
     driver = webdriver.Chrome()
     driver.implicitly_wait(TIMEOUT_ELEMENT)
     driver.get(URL)
-    return driver
+    yield driver
+    driver.quit()
