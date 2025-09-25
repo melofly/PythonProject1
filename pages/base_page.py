@@ -1,13 +1,5 @@
-import enum
-from typing import Union
-
-import pytest, selenium
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from enum import Enum
-from locators.locators_for_login_page import Locators
 
 
 class BasePage:
@@ -28,12 +20,3 @@ class BasePage:
         element = self.find_element(locator, timeout)
         element.clear()
         element.send_keys(text)
-
-
-
-
-
-
-
-
-

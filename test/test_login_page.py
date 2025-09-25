@@ -1,26 +1,23 @@
 import pytest
-from selenium.webdriver.common.by import By
 from faker import Faker
-from pages.login_page import LoginPage, BasePage
+from pages.login_page import LoginPage
 
 fake = Faker()
 fake_login = fake.user_name()
 fake_password = fake.password()
 
 @pytest.mark.parametrize(
-    'user',
+    'login, password',
     [
         (fake_login, fake_password)
     ]
 )
-def test_login_page(user, driver):
+def test_login_page(login, password, driver):
     login_page_drive = LoginPage(driver)
-    login, password = user
     login_page_drive.login(username=login, password=password)
 
-    error_message = driver.find_element(
-        By.XPATH,
-        '//*[contains(text(), "Пожалуйста, проверьте свой пароль")]'
-    ).text
+    el = login_page_drive.error_message_find
 
-    assert "Пожалуйста, проверьте свой пароль и имя аккаунта и попробуйте снова." == error_message
+    expected = "Пожалуйста, проверьте свой пароль и имя аккаунта и попробуйте снова."
+    actual = el.text
+    assert actual == expected, f"нам надо '{expected}',хуйня '{actual}'"
