@@ -1,22 +1,8 @@
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.support.wait import WebDriverWait
 
 class BasePage:
-    TIMEOUT_ELEMENT = 10
+    TIMEOUT = 12
 
-    def __init__(self, driver):
+    def __init__(self, driver, timeout=TIMEOUT):
         self.driver = driver
-
-    def find_element(self, locator, timeout=TIMEOUT_ELEMENT):
-        return WebDriverWait(self.driver, timeout).until(
-            EC.visibility_of_element_located(locator)
-        )
-
-    def click(self, locator, timeout=TIMEOUT_ELEMENT):
-        self.find_element(locator, timeout).click()
-
-    def input_element(self, locator, text, timeout=TIMEOUT_ELEMENT):
-        element = self.find_element(locator, timeout)
-        element.clear()
-        element.send_keys(text)
+        self.wait = WebDriverWait(driver, timeout)

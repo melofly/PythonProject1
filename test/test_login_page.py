@@ -1,23 +1,27 @@
 import pytest
 from faker import Faker
+from pages.main_page import MainPage
 from pages.login_page import LoginPage
 
 fake = Faker()
-fake_login = fake.user_name()
-fake_password = fake.password()
+fake_user = {
+    'user':
+        (fake.user_name(), fake.password())
+}
 
 @pytest.mark.parametrize(
     'login, password',
     [
-        (fake_login, fake_password)
+        (fake_user.get('user'))
     ]
 )
 def test_login_page(login, password, driver):
-    login_page_drive = LoginPage(driver)
-    login_page_drive.login(username=login, password=password)
+    main_page_drive = MainPage(driver=driver)
+    main_page_drive.open_login_page()
 
-    el = login_page_drive.error_message_find
+    login_page_drive = LoginPage(driver=driver)
+    login_page_drive.auth(username=login, password=password)
 
+    actual = login_page_drive.get_error_message
     expected = "Пожалуйста, проверьте свой пароль и имя аккаунта и попробуйте снова."
-    actual = el.text
-    assert actual == expected, f"нам надо '{expected}',хуйня '{actual}'"
+    assert actual == expected, f"нам надо это '{expected}',а это хуйня '{actual}'"
